@@ -15,32 +15,32 @@ public class FreeController {
 	private static GpioPinDigitalOutput pinEye;
 	private static GpioPinDigitalOutput pinMouth;
 	private static GpioPinDigitalOutput pinHead;
-	String state = String.format("Eyes: %s     Mouth: %s     Head: %s", (getEye().getState()).toString(),(getMouth().getState()).toString(), (getHead().getState()).toString() );
+	String state0 = String.format("Eyes: %s     Mouth: %s     Head: %s", (getEye().getState()).toString(),(getMouth().getState()).toString(), (getHead().getState()).toString() );
 
 	
 	@RequestMapping("/")
 	public String init() {
 		
-		return state;
+		return state0;
 	}
 	
 	
 	@RequestMapping("/eyes")
 	public String eyes() {
 		getEye().setState(PinState.HIGH);
-		return state;
+		return state0;
 	}
 	
 	@RequestMapping("/mouth")
 	public String mouth() {
 		getMouth().setState(PinState.HIGH);
-		return state;
+		return state0;
 	}
 	
 	@RequestMapping("/head")
 	public String head() {
 		getHead().setState(PinState.HIGH);
-		return state;
+		return state0;
 	}
 	
 	@RequestMapping("/blink")
@@ -48,7 +48,7 @@ public class FreeController {
 		getEye().blink(50L, 5000L);
 		getMouth().blink(50L, 5000L);
 		getHead().blink(50L, 5000L);
-		return state;
+		return state0;
 	}
 	
 	@RequestMapping("/set1")
@@ -78,7 +78,7 @@ public class FreeController {
 		getEye().setState(PinState.HIGH);
 		getMouth().setState(PinState.HIGH);
 		getHead().setState(PinState.HIGH);
-		return state;
+		return state0;
 	}
 	
 	@RequestMapping("/allOff")
@@ -86,7 +86,7 @@ public class FreeController {
 		getEye().setState(PinState.LOW);
 		getMouth().setState(PinState.LOW);
 		getHead().setState(PinState.LOW);
-		return state; 
+		return state0; 
 	}
 	
 	//Inits + calls
