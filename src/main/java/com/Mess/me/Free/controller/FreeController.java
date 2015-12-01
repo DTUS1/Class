@@ -51,27 +51,6 @@ public class FreeController {
 		return state0;
 	}
 	
-	@RequestMapping("/set1")
-	public String set1() {
-		getEye().pulse(1000L);
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		getMouth().pulse(1000L);
-		
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		getHead().pulse(1000L);
-		
-		return "Set1 Started";
-	}
 	
 	@RequestMapping("/allOn")
 	public String all() {
