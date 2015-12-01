@@ -15,7 +15,7 @@ public class FreeController {
 	private static GpioPinDigitalOutput pinEye;
 	private static GpioPinDigitalOutput pinMouth;
 	private static GpioPinDigitalOutput pinHead;
-	String state0 = String.format("Eyes: %s     Mouth: %s     Head: %s", (getEye().getState()).toString(),(getMouth().getState()).toString(), (getHead().getState()).toString() );
+	private String state0 = String.format("Eyes: %s     Mouth: %s     Head: %s", (getEye().getState()).toString(),(getMouth().getState()).toString(), (getHead().getState()).toString() );
 
 	
 	@RequestMapping("/")
