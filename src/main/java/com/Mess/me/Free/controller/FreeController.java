@@ -1,7 +1,7 @@
 package com.Mess.me.Free.controller;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
@@ -9,7 +9,7 @@ import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.RaspiPin;
 
-@SpringBootApplication
+@RestController
 public class FreeController {
 	
 	private static GpioPinDigitalOutput pinEye;
