@@ -15,32 +15,32 @@ public class FreeController {
 	private static GpioPinDigitalOutput pinEye;
 	private static GpioPinDigitalOutput pinMouth;
 	private static GpioPinDigitalOutput pinHead;
-	private String state0 = String.format("Eyes: %s     Mouth: %s     Head: %s", (getEye().getState()).toString(),(getMouth().getState()).toString(), (getHead().getState()).toString() );
+	//String state0 = String.format("Eyes: %s     Mouth: %s     Head: %s", (getEye().getState()).toString(),(getMouth().getState()).toString(), (getHead().getState()).toString() );
 
 	
 	@RequestMapping("/")
 	public String init() {
 		
-		return state0;
+		return "Running";
 	}
 	
 	
 	@RequestMapping("/eyes")
 	public String eyes() {
 		getEye().setState(PinState.HIGH);
-		return state0;
+		return "Eyes On";
 	}
 	
 	@RequestMapping("/mouth")
 	public String mouth() {
 		getMouth().setState(PinState.HIGH);
-		return state0;
+		return "Mouth On";
 	}
 	
 	@RequestMapping("/head")
 	public String head() {
 		getHead().setState(PinState.HIGH);
-		return state0;
+		return "Head On";
 	}
 	
 	@RequestMapping("/blink")
@@ -48,16 +48,37 @@ public class FreeController {
 		getEye().blink(50L, 5000L);
 		getMouth().blink(50L, 5000L);
 		getHead().blink(50L, 5000L);
-		return state0;
+		return "Blinking";
 	}
 	
+	@RequestMapping("/set1")
+	public String set1() {
+		getEye().pulse(1000L);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		getMouth().pulse(1000L);
+		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		getHead().pulse(1000L);
+		
+		return "Set1 Started";
+	}
 	
 	@RequestMapping("/allOn")
 	public String all() {
 		getEye().setState(PinState.HIGH);
 		getMouth().setState(PinState.HIGH);
 		getHead().setState(PinState.HIGH);
-		return state0;
+		return "All On";
 	}
 	
 	@RequestMapping("/allOff")
@@ -65,7 +86,7 @@ public class FreeController {
 		getEye().setState(PinState.LOW);
 		getMouth().setState(PinState.LOW);
 		getHead().setState(PinState.LOW);
-		return state0; 
+		return "All Off"; 
 	}
 	
 	//Inits + calls
