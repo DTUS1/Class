@@ -15,30 +15,62 @@ public class FreeController {
 	private static GpioPinDigitalOutput pinEye;
 	private static GpioPinDigitalOutput pinMouth;
 	private static GpioPinDigitalOutput pinHead;
-	
+	String state = String.format("Eyes: %s     Mouth: %s     Head: %s", (getEye().getState()).toString(),(getMouth().getState()).toString(), (getHead().getState()).toString() );
+
 	
 	@RequestMapping("/")
 	public String init() {
-		return "Running";
+		
+		return state;
 	}
 	
 	
 	@RequestMapping("/eyes")
 	public String eyes() {
 		getEye().setState(PinState.HIGH);
-		return (getEye().getState()).toString();
+		return state;
 	}
 	
 	@RequestMapping("/mouth")
 	public String mouth() {
 		getMouth().setState(PinState.HIGH);
-		return (getMouth().getState()).toString();
+		return state;
 	}
 	
 	@RequestMapping("/head")
 	public String head() {
 		getHead().setState(PinState.HIGH);
-		return (getHead().getState()).toString();
+		return state;
+	}
+	
+	@RequestMapping("/blink")
+	public String blink() {
+		getEye().blink(50L, 5000L);
+		getMouth().blink(50L, 5000L);
+		getHead().blink(50L, 5000L);
+		return state;
+	}
+	
+	@RequestMapping("/set1")
+	public String set1() {
+		getEye().pulse(1000L);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		getMouth().pulse(1000L);
+		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		getHead().pulse(1000L);
+		
+		return "Set1 Started";
 	}
 	
 	@RequestMapping("/allOn")
@@ -46,7 +78,7 @@ public class FreeController {
 		getEye().setState(PinState.HIGH);
 		getMouth().setState(PinState.HIGH);
 		getHead().setState(PinState.HIGH);
-		return "All On";
+		return state;
 	}
 	
 	@RequestMapping("/allOff")
@@ -54,10 +86,10 @@ public class FreeController {
 		getEye().setState(PinState.LOW);
 		getMouth().setState(PinState.LOW);
 		getHead().setState(PinState.LOW);
-		return "All Off";
+		return state; 
 	}
 	
-	
+	//Inits + calls
 	public GpioPinDigitalOutput getEye() {
 		
 		if(pinEye == null) {
